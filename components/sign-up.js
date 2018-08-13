@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements'
+import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements';
 
 
-export default class App extends React.Component {
+export default class SignUp extends React.Component {
 
   someFunction() {
     console.log('textchange')
@@ -11,8 +11,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Welcome To PlannedPantry!</Text>
-        <Text style={styles.desc}>An application that helps users track current food inventory, plan weekly meals, and populates grocery shopping list.</Text>
+        <Text>Welcome To PlannedPantry!</Text>
         <FormLabel>User Name</FormLabel>
         {/* <FormInput onChangeText={this.someFunction()}/> */}
         <FormValidationMessage>Required</FormValidationMessage>
@@ -34,20 +33,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'column'
-  },
-  title: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-    flexDirection: 'column'
-  },
-  desc: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-    flexDirection: 'column'
   },
 });
