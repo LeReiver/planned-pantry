@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import firebase from 'firebase';
 
 export default class Loading extends React.Component {
   componentDidMount() {
