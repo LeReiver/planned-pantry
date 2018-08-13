@@ -6,21 +6,21 @@ import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-nativ
 export default class App extends React.Component {
 
   someFunction() {
-    console.log('textchange')
+    console.log('')
   } 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Welcome To PlannedPantry!</Text>
+        <Text style={styles.title}>Planned Pantry</Text>
         <Text style={styles.desc}>An application that helps users track current food inventory, plan weekly meals, and populates grocery shopping list.</Text>
-        <FormLabel>User Name</FormLabel>
-        {/* <FormInput onChangeText={this.someFunction()}/> */}
+        <FormLabel style={styles.label}>User Name</FormLabel>
+        <FormInput onChangeText={this.someFunction()}/>
         <FormValidationMessage>Required</FormValidationMessage>
-        <FormLabel>Password</FormLabel>
-        {/* <FormInput onChangeText={this.someFunction()}/> */}
+        <FormLabel style={styles.label}>Password</FormLabel>
+        <FormInput onChangeText={this.someFunction()}/>
         <FormValidationMessage>Required</FormValidationMessage>
-        <FormLabel>Confirm Password</FormLabel>
-        {/* <FormInput onChangeText={this.someFunction()}/> */}
+        <FormLabel style={styles.label}>Confirm Password</FormLabel>
+        <FormInput onChangeText={this.someFunction()}/>
         <FormValidationMessage>Required</FormValidationMessage>
         <Button title='SIGN UP' />
       </View>
@@ -31,27 +31,26 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    backgroundColor: '#eee',
   },
   title: {
-    fontSize: 25,
+    fontSize: 23,
     fontWeight: 'bold',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     flexDirection: 'column',
     marginTop: 0,
+    color: '#CD4D49',
   },
   desc: {
-    width: '80%',
-    marginHorizontal: '10%',
+    width: '90%',
     marginTop: '5%',
-    backgroundColor: '#ddd',
     flexDirection: 'column',
     justifyContent: 'center',
-    padding: 15,
-    fontSize: 20,
+    padding: 5,
+    fontSize: 18,
   },
 });
