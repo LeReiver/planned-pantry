@@ -41,13 +41,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    marginTop: 0,
   },
   desc: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-    flexDirection: 'column'
+    width: '80%',
+    marginHorizontal: '10%',
+    marginTop: '5%',
+    backgroundColor: '#ddd',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    padding: 15,
+    fontSize: 20,
   },
 });
