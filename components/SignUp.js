@@ -4,17 +4,20 @@ import firebase from 'firebase';
 
 export default class SignUp extends React.Component {
   state = { email: '', password: '', errorMessage: null }
-handleSignUp = () => {
-  firebase
-  .auth()
-  .createUserWithEmailAndPassword(this.state.email, this.state.password)
-  .then(() => this.props.navigation.navigate('Main'))
-  .catch(error => this.setState({ errorMessage: error.message }))
-  console.log('handleSignUp')
-}
+  handleSignUp = () => {
+    firebase
+    .auth()
+    .createUserWithEmailAndPassword(this.state.email, this.state.password)
+    .then(() => this.props.navigation.navigate('Main'))
+    .catch(error => this.setState({ errorMessage: error.message }))
+  }
+
+
+
 render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.header}>Planned Pantry</Text>
         <Text>Sign Up</Text>
         {this.state.errorMessage &&
           <Text style={{ color: 'red' }}>
