@@ -9,7 +9,7 @@ import SignUp from './components/SignUp';
 import Login from './components/Login';
 import Main from './components/Main';
 
-var config = {
+const config = {
   apiKey: "AIzaSyAbMcMoPelfM09L14WZ-mFes-NJv036VjY",
   authDomain: "planned-pantry.firebaseapp.com",
   databaseURL: "https://planned-pantry.firebaseio.com",

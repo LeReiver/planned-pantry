@@ -12,21 +12,6 @@ export default class Login extends React.Component {
       .signInWithEmailAndPassword(email, password)
       .then(() => this.props.navigation.navigate('Main'))
       
-      firebase.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          console.log(user);
-        } else {
-          // No user is signed in.
-        }
-      });
-      
-      // firebase
-      // .database()
-      // .ref('users')
-      // .orderByChild('emailAddress')
-      // .equalTo(email)
-      // .once('value', snap => console.log(snap.val())); 
-
   }
   render() {
     return (
