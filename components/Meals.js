@@ -7,9 +7,11 @@ export default class Meals extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            currentUser: null,
             mealName: '',
             mealTime: '',
             mealDate: ''
+            
         }
     }
     
@@ -27,22 +29,24 @@ export default class Meals extends Component{
     }
 
     addMeal() {
-      
+
     const userId = firebase.auth().currentUser.uid;
 
-        console.log('Adding Meal', this.state)
+        console.log('Adding Meal', userId)
         firebase.database().ref('users/' + userId ).set(
             {
+              
                 mealName: this.state.mealName,
                 mealTime: this.state.mealTime,
                 mealDate: this.state.mealDate
           })
-        return meal
-          .then((meal) => {
-              console.log('Added Meal', meal)
-              this.setState({
-                meal: meal
-              })
+          .then(() => {
+              console.log('Added Meal')
+              // this.setState({
+              //   mealName: this.state.mealName,
+              //   mealTime: this.state.mealTime,
+              //   mealDate: this.state.mealDate
+              // })
             })
           .catch(err => console.log(err))
     }
@@ -53,10 +57,6 @@ export default class Meals extends Component{
           <View style={styles.container}>
            
         <Text>Add A Meal</Text>
-         {/* {this.state.errorMessage &&
-            <Text style={{ color: 'red' }}>
-               {this.state.errorMessage} */}
-            {/* </Text> */}
           <TextInput
             style={styles.textInput}
             autoCapitalize="none"
@@ -79,6 +79,7 @@ export default class Meals extends Component{
             required
           />
           <Button title="Add" onPress={this.addMeal} />
+          <Button title="Show Meals" onPress={() => {this.props.navigation.navigate('Main')}} />
           </View>
         )
     }

@@ -15,119 +15,88 @@ export default class Main extends React.Component {
     const { currentUser } = firebase.auth()
     this.setState({ currentUser })
 
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        // console.log(user);
+    // firebase.auth().onAuthStateChanged(function(user) {
+    //   if (user) {
 
-        firebase.database().ref('users/' + user.uid ).child('meal').on('value', data => {
-          // console.log(data)
-            var returnArr = [];
-        
-            data.forEach(function(childSnapshot) {
-                var item = childSnapshot.val();
-                item.key = childSnapshot.key;
-        
-                returnArr.push(item);
-            });
-            // this.setState({
-            //   meal: returnArr
-            // })
-            // console.log(returnArr)
-        })
-    //     const meal = [
-    //       {
-    //       mealDate: '2018-08-27',
-    //       mealName: 'tacos',
-    //       mealTime: 'dinner'
-    //       },
-    //       {
-    //         mealDate: '2018-08-27',
-    //         mealName: 'salad',
-    //         mealTime: 'lunch'
-    //       },
-    //       {
-    //         mealDate: '2018-08-28',
-    //         mealName: 'tacos',
-    //         mealTime: 'lunch'
-    //       },
-    //       {
-    //         mealDate: '2018-08-28',
-    //         mealName: 'pizza',
-    //         mealTime: 'dinner'
-    //       }
-    //   ];
-    //   firebase.database.ref('users').child(meal).set(meal)
-    //   .then(meal => console.log(meal))
-    //   .catch(err => console.log(err))
+    //     firebase.database().ref('users/' + user.uid ).child('meal').on('value', data => {
+    //       let returnArr = [];
+    //       let meals;
+      
+    //       data.forEach(function(childSnapshot) {
+    //           var item = childSnapshot.val();
+    //           item.key = childSnapshot.key;
+      
+    //           returnArr.push(item);
+    //       });
+    //       meals = returnArr.map(meal => {
+    //         let mealDate = meal.mealDate;
+    //         let mealName = meal.mealName;
+    //         let mealTime = meal.mealTime;
+    //         console.log(mealDate,mealName,mealTime)
+    //       })
+    //       return meals;
+    //     })
     //   } else {
     //     // No user is signed in.
     //   }
     // });
-
-      }
-    })
   }
 
-  addMeal(user) {
-    const userId = firebase.auth().currentUser.uid;
-    const meal = [
-      {
-      mealDate: '2018-08-27',
-      mealName: 'tacos',
-      mealTime: 'dinner'
-      },
-      {
-        mealDate: '2018-08-27',
-        mealName: 'salad',
-        mealTime: 'lunch'
-      },
-      {
-        mealDate: '2018-08-28',
-        mealName: 'tacos',
-        mealTime: 'lunch'
-      },
-      {
-        mealDate: '2018-08-28',
-        mealName: 'pizza',
-        mealTime: 'dinner'
-      }
-    ];
-    firebase.database().ref('users/' + userId).set(
-      {
-        meal: meal,
-      })
-      .then(() => {
-        // console.log('Added Meal')
-      })
-      .catch(err => console.log(err))
+  // addMeal(user) {
+  //   const userId = firebase.auth().currentUser.uid;
+  //   const meal = [
+  //     {
+  //     mealDate: '2018-08-27',
+  //     mealName: 'toast',
+  //     mealTime: 'breakfast'
+  //     },
+  //     {
+  //       mealDate: '2018-08-27',
+  //       mealName: 'salad',
+  //       mealTime: 'lunch'
+  //     },
+  //     {
+  //       mealDate: '2018-08-28',
+  //       mealName: 'burger',
+  //       mealTime: 'dinner'
+  //     }
+  //   ];
+  //   firebase.database().ref('users/' + userId).set(
+  //     {
+  //       meal: meal,
+  //     })
+  //     .then(() => {
+  //       // console.log('Added Meal')
+  //     })
+  //     .catch(err => console.log(err))
 
 
-    firebase.database().ref('users').once('value', data => {
-      // console.log(data.toJSON());
-      data.toJSON()
-    })
+  //   firebase.database().ref('users').once('value', data => {
+  //     // console.log(data.toJSON());
+  //     data.toJSON()
+  //   })
   
   
-  //   const snapshotToArray = snapshot => {
-  //     var returnArr = [];
+  // //   const snapshotToArray = snapshot => {
+  // //     var returnArr = [];
   
-  //     snapshot.forEach(function(childSnapshot) {
-  //       var item = childSnapshot.val();
-  //       item.key = childSnapshot.key;
-  //       returnArr.push(item);
-  //     });
+  // //     snapshot.forEach(function(childSnapshot) {
+  // //       var item = childSnapshot.val();
+  // //       item.key = childSnapshot.key;
+  // //       returnArr.push(item);
+  // //     });
 
-  //     // console.log(returnArr)
-  //     // returnArr = returnArr.map(l => console.log(l));
-  //     // console.log(returnArr)
-  //   };
+  // //     // console.log(returnArr)
+  // //     // returnArr = returnArr.map(l => console.log(l));
+  // //     // console.log(returnArr)
+  // //   };
 
-  //   firebase.database().ref('/users').on('value', function(snapshot) {
-  //     // console.log(snapshotToArray(snapshot));
-  //     snapshotToArray(snapshot);
-  //   });
+  // //   firebase.database().ref('/users').on('value', function(snapshot) {
+  // //     // console.log(snapshotToArray(snapshot));
+  // //     snapshotToArray(snapshot);
+  // //   });
 
-  };
+  // };
 
   // addMeal(user) {
 
@@ -148,13 +117,37 @@ export default class Main extends React.Component {
   //     }
 
 
-  getMeals(user) {
-    firebase.database().ref('users/' + userId ).on('value', data => {
-      console.log(data)
-      let meal = data.toJSON()
-      console.log('Retrieved meals')
-      // console.log(meal);
-    })
+  getMeals() {
+    // const userId = firebase.auth().currentUser.uid;
+    // firebase.database().ref('users/' + userId ).on('value', data => {
+    //   data.toJSON()
+    // })
+
+    // firebase.auth().onAuthStateChanged(function(user) {
+    //   if (user) {
+
+    //     firebase.database().ref('users/' + user.uid ).child('meal').on('value', data => {
+    //       let returnArr = [];
+    //       let meals;
+      
+    //       data.forEach(function(childSnapshot) {
+    //         var item = childSnapshot.val();
+    //         item.key = childSnapshot.key;
+    
+    //         returnArr.push(item);
+    //       });
+    //       meals = returnArr.map(meal => {
+    //         let mealDate = meal.mealDate;
+    //         let mealName = meal.mealName;
+    //         let mealTime = meal.mealTime;
+    //         console.log(mealDate,mealName,mealTime)
+    //       })
+    //       return meals;
+    //     })
+    //   } else {
+    //     // No user is signed in.
+    //   }
+    // });
   }
 
   removeMeal(user) {
@@ -178,22 +171,34 @@ export default class Main extends React.Component {
   render() {
 
     const { currentUser } = this.state;
+    let returnArr;
+
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+
+        firebase.database().ref('users/' + user.uid ).child('meal').on('value', data => {
+          let returnArr = [];
+          let meals;
+
+          data.forEach(function(childSnapshot) {
+            var item = childSnapshot.val();
+            item.key = childSnapshot.key;
     
-    const snapshotToArray = snapshot => {
-      var returnArr = [];
-  
-      snapshot.forEach(function(childSnapshot) {
-          var item = childSnapshot.val();
-          item.key = childSnapshot.key;
-  
-          returnArr.push(item);
-      });
-      // console.log(returnArr)
+            returnArr.push(item);
+          });
+          returnArr.map(meal => {
+            let mealDate = meal.mealDate;
+            let mealName = meal.mealName;
+            let mealTime = meal.mealTime;
+            console.log(mealDate,mealName,mealTime)
+          })
+          return returnArr;
+        })
+      } else {
+        // No user is signed in.
+      }
+
       return returnArr;
-    };
-  
-    firebase.database().ref('/users').on('value', function(snapshot) {
-      snapshotToArray(snapshot);
     });
 
     return (
@@ -204,16 +209,15 @@ export default class Main extends React.Component {
           {/* {this.getMeals(currentUser)} */}
         </Text>
         <List containerStyle={{marginBottom: 20}}> 
-        {
-        this.state.meal.map((l) => (
-          <ListItem
-            meaName={l.mealName}
-            mealDate={l.mealDate}
-            key={l.key}
-            mealTime={l.mealTime}
-              />
+          {/* {
+            returnArr.map(meal => (
+            <ListItem
+              mealDate = {meal.mealDate}
+              meaName = {meal.mealName}
+              mealTime = {meal.mealTime}
+            />
             ))
-          }
+          } */}
         </List> 
 
         <Button title="Add Meal" onPress={() => {this.props.navigation.navigate('Meals')}} />
