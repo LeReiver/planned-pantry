@@ -8,6 +8,7 @@ import Loading from './components/Loading';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import Main from './components/Main';
+import Meals from './components/Meals';
 
 const config = {
   apiKey: "AIzaSyAbMcMoPelfM09L14WZ-mFes-NJv036VjY",
@@ -27,7 +28,8 @@ const App = createSwitchNavigator(
     Loading,
     SignUp,
     Login,
-    Main
+    Main,
+    Meals
   },
   {
     initialRouteName: 'Loading'
