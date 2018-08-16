@@ -29,26 +29,23 @@ export default class Meals extends Component{
     }
 
     addMeal() {
+      let mealName = this.state.mealName;
+      let mealTime = this.state.mealTime;
+      let mealDate = this.state.mealDate;
 
-    const userId = firebase.auth().currentUser.uid;
+      const userId = firebase.auth().currentUser.uid;
+      console.log('Adding Meal', userId)
+      firebase.database().ref('users/' + userId + '/meal').push(
+          {
+            mealName: mealName,
+            mealTime: mealTime,
+            mealDate: mealDate
+        })
+        .then(() => {
+            console.log('Added Meal')
 
-        console.log('Adding Meal', userId)
-        firebase.database().ref('users/' + userId ).set(
-            {
-              
-                mealName: this.state.mealName,
-                mealTime: this.state.mealTime,
-                mealDate: this.state.mealDate
           })
-          .then(() => {
-              console.log('Added Meal')
-              // this.setState({
-              //   mealName: this.state.mealName,
-              //   mealTime: this.state.mealTime,
-              //   mealDate: this.state.mealDate
-              // })
-            })
-          .catch(err => console.log(err))
+        .catch(err => console.log(err))
     }
 
     render() {
@@ -78,7 +75,7 @@ export default class Meals extends Component{
             value={mealDate => this.setState({ mealDate })}
             required
           />
-          <Button title="Add" onPress={this.addMeal} />
+          <Button title="Add" onPress={() => this.addMeal()} />
           <Button title="Show Meals" onPress={() => {this.props.navigation.navigate('Main')}} />
           </View>
         )
