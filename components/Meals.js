@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
 import firebase from 'firebase';
-import DatePicker from './date-picker'
+import DatePicker from 'react-native-datepicker'
 
 export default class Meals extends Component{
     constructor(props) {
@@ -10,14 +10,15 @@ export default class Meals extends Component{
             currentUser: null,
             mealName: '',
             mealTime: '',
-            mealDate: ''
-            
+            date: ''
         }
     }
     
     componentWillMount() {
-        const { currentUser } = firebase.auth()
-        this.setState({ currentUser })
+        // const { currentUser } = firebase.auth()
+        // this.setState({ 
+        //   currentUser
+        // })
 
         firebase.auth().onAuthStateChanged(function(user) {
           if (user) {
@@ -28,10 +29,40 @@ export default class Meals extends Component{
         })
     }
 
+    getDate() {
+      return (
+        <DatePicker
+          style={{width: 200}}
+          date={this.state.date}
+          mode="date"
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          minDate="2018-08-01"
+          maxDate="2028-06-01"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0
+            },
+            dateInput: {
+              marginLeft: 36,
+              width: 30
+            }
+            // ... You can check the source to find the other keys.
+          }}
+          onDateChange={(date) => {this.setState({date: date})}}
+        />
+      )
+    }
+
     addMeal() {
       let mealName = this.state.mealName;
       let mealTime = this.state.mealTime;
-      let mealDate = this.state.mealDate;
+      let mealDate = this.state.date;
 
       const userId = firebase.auth().currentUser.uid;
       console.log('Adding Meal', userId)
@@ -47,6 +78,8 @@ export default class Meals extends Component{
           })
         .catch(err => console.log(err))
     }
+
+
 
     render() {
 
@@ -72,8 +105,28 @@ export default class Meals extends Component{
           />
           <DatePicker 
             style={styles.textInput}
-            value={mealDate => this.setState({ mealDate })}
-            required
+            date={this.state.date}
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            minDate="2018-08-01"
+            maxDate="2028-06-01"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 4,
+                marginLeft: 0
+              },
+              dateInput: {
+                marginLeft: 36,
+                width: '70%'
+              }
+              // ... You can check the source to find the other keys.
+            }}
+            onDateChange={(date) => {this.setState({date: date})}}
           />
           <Button title="Add" onPress={() => this.addMeal()} />
           <Button title="Show Meals" onPress={() => {this.props.navigation.navigate('Main')}} />

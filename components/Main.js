@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Platform, Image, Text, TextInput, View, Button, FlatList } from 'react-native';
-import { List, ListItem } from 'react-native-elements'
+import { StyleSheet, Text, View, ScrollView, Button } from 'react-native';
+import { List, ListItem, Header } from 'react-native-elements'
 import firebase from 'firebase';
 
 export default class Main extends React.Component {
@@ -20,16 +20,17 @@ export default class Main extends React.Component {
   }
 
   componentDidMount() {
-    // const { currentUser } = firebase.auth()
-
     const that = this;
     this.getMeals(that);
+  }
+
+  componentWillUnMount() {
+    this.getMeals();
   }
 
   getMeals(that) {
     const { currentUser } = firebase.auth()
     this.setState( {currentUser} )
-    const myState = that.state;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         firebase.database().ref('users/' + user.uid ).child('meal').on('value', data => {
@@ -42,19 +43,16 @@ export default class Main extends React.Component {
             returnArr.push(item);
           });
           returnArr.map(meal => {
-            // console.log(meal.key,meal.mealDate,meal.mealTime,meal.mealName)
             return meal
           })
-          // console.log(returnArr); 
           that.setState({
             meal: returnArr
           })
-          console.log(that.state)
           return returnArr;
 
         })
       } else {
-        // No user is signed in.
+        return (<Text> There is no user </Text>)
       }
     });
   }
@@ -77,28 +75,58 @@ export default class Main extends React.Component {
     });
   }
 
+  // renderRow (rowData, sectionId) {
+  //   return (
+  //     this.state.meal.map(meal => (
+  //       // console.log(meal.mealName)
+  //     <ListItem
+  //       style={styles.mealListStyle}
+  //       key={sectionId}
+  //       mealDate={rowData.meal.mealDate}
+  //       mealName={rowData.meal.mealName}
+  //       mealTime={rowData.meal.mealTime}
+  //     />
+  //     ))
+    
+  //   )
+  // }
+
   render() {
 
     const { currentUser } = this.state;
     
     return (
       <View style={styles.container}>
+         <Header
+          statusBarProps={{ barStyle: 'light-content' }}
+          // leftComponent={<MyCustomLeftComponent />}
+          centerComponent={{ text: 'Planned Pantry', style: { color: '#3c9' } }}
+          outerContainerStyles={{ backgroundColor: '#3D6DCC', width: '100%'}}
+          innerContainerStyles={{ justifyContent: 'space-around' }}
+        />
         <Text>
           Welcome {currentUser && currentUser.email}!
         </Text>
-        <List containerStyle={{marginBottom: 20,width: 80}}> 
-          {
-            this.state.meal.map(meal => (
+        <ScrollView>
+        <List containerStyle={{margin: 20,width: 250}}> 
+          {console.log('render', this.state.meal)}
+            {this.state.meal.map(meal => (
+              // console.log(meal.mealName)
             <ListItem
+              style={styles.mealListStyle}
               key={meal.key}
               mealDate={meal.mealDate}
-              meaName={meal.mealName}
+              mealName={meal.mealName}
               mealTime={meal.mealTime}
             />
             ))
           }
+          {/* <ListView
+            renderRow={this.renderRow}
+            dataSource={this.state.dataSource}
+          /> */}
         </List> 
-
+        </ScrollView>
         <Button title="Add Meal" onPress={() => {this.props.navigation.navigate('Meals')}} />
         <Button title="Logout" onPress={this.signOut} />
         {/* <Button title="Remove Meal" onPress={this.removeMeal} /> */}
@@ -106,7 +134,6 @@ export default class Main extends React.Component {
       </View>
     )
   }
-
 };
 
 const styles = StyleSheet.create({
@@ -121,6 +148,11 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     marginTop: 8
+  },
+  mealListStyle: {
+    height: 100,
+    marginBottom: 10,
+    marginLeft: 0
   }
 });
 
