@@ -12,6 +12,7 @@ export default class Main extends React.Component {
       meal: [] 
     }
 
+    this.getMeals = this.getMeals.bind(this)
     // this.mealDate = this.mealDate.bind(this)
     // this.mealName = this.mealName.bind(this)
     // this.mealTime = this.mealTime.bind(this)
@@ -19,36 +20,38 @@ export default class Main extends React.Component {
   }
 
   componentDidMount() {
-    const { currentUser } = firebase.auth()
+    // const { currentUser } = firebase.auth()
 
-    const myState = this.state;
-    console.log(myState)
-    this.getMeals();
-
-
+    const that = this;
+    this.getMeals(that);
   }
 
-  getMeals() {
+  getMeals(that) {
+    const { currentUser } = firebase.auth()
+    this.setState( {currentUser} )
+    const myState = that.state;
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-
         firebase.database().ref('users/' + user.uid ).child('meal').on('value', data => {
           let returnArr = [];
 
           data.forEach(function(childSnapshot) {
-              var item = childSnapshot.val();
-              item.key = childSnapshot.key;
-      
-              returnArr.push(item);
+            var item = childSnapshot.val();
+            item.key = childSnapshot.key;
+
+            returnArr.push(item);
           });
           returnArr.map(meal => {
-            console.log(meal.mealDate,meal.mealTime,meal.mealName)
+            // console.log(meal.key,meal.mealDate,meal.mealTime,meal.mealName)
+            return meal
           })
-          // console.log(this.state)
-          return returnArr;
-          this.setState({
+          // console.log(returnArr); 
+          that.setState({
             meal: returnArr
           })
+          console.log(that.state)
+          return returnArr;
+
         })
       } else {
         // No user is signed in.
@@ -82,16 +85,15 @@ export default class Main extends React.Component {
       <View style={styles.container}>
         <Text>
           Welcome {currentUser && currentUser.email}!
-          {/* {this.addMeal(currentUser)} */}
-          {/* {this.getMeals(currentUser)} */}
         </Text>
-        <List containerStyle={{marginBottom: 20}}> 
+        <List containerStyle={{marginBottom: 20,width: 80}}> 
           {
             this.state.meal.map(meal => (
             <ListItem
-              mealDate = {meal.mealDate}
-              meaName = {meal.mealName}
-              mealTime = {meal.mealTime}
+              key={meal.key}
+              mealDate={meal.mealDate}
+              meaName={meal.mealName}
+              mealTime={meal.mealTime}
             />
             ))
           }
