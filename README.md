@@ -20,10 +20,10 @@ This project was built in one week while learning new technologies.
 
 #### Mobile Small
 
-![Mobile Small Login Page](https://github.com/thinkful-ei21/mike_vinylog_client/blob/master/src/assets/images/mobile-login_s.png?raw=true "Mobile Small  Login Page")
-![Mobile Small Home Page](https://github.com/thinkful-ei21/mike_vinylog_client/blob/master/src/assets/images/mobile-home_s.png?raw=true "Mobile Small  Home Page")
-![Mobile Small Search Page](https://github.com/thinkful-ei21/mike_vinylog_client/blob/master/src/assets/images/mobile-search_s.png?raw=true "Mobile Small  Search Page")
-![Mobile Small Collection Page](https://github.com/thinkful-ei21/mike_vinylog_client/blob/master/src/assets/images/mobile-collection_s.png?raw=true "Mobile Small  Collection Page")
+![Mobile Small Login Page](https://github.com/LeReiver/planned-pantry/blob/master/components/images/login.png?raw=true "Mobile Small  Login Page")
+![Mobile Small Sign Up Page](https://github.com/LeReiver/planned-pantry/blob/master/components/images/signup.png?raw=true "Mobile Small  Sign Up Page")
+![Mobile Small Meals Page](https://github.com/LeReiver/planned-pantry/blob/master/components/images/meals.png?raw=true "Mobile Small Meals Page")
+![Mobile Small Add Meal Page](https://github.com/LeReiver/planned-pantry/blob/master/components/images/add-meal.png?raw=true "Mobile Small  Add Meal Page")
 
 
 ### Future Features
