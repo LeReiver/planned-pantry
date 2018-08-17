@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, Button } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import Button from 'react-native-button';
 import { List, ListItem, Header } from 'react-native-elements'
 import firebase from 'firebase';
 
@@ -54,7 +55,7 @@ export default class Main extends React.Component {
     });
   }
 
-  removeMeal(user) {
+  removeMeal() {
     console.log('Removing meal')
     firebase.database().ref('users')
     .child('user')
@@ -117,6 +118,7 @@ export default class Main extends React.Component {
               mealDate={meal.mealDate}
               mealName={meal.mealName}
               mealTime={meal.mealTime}
+            // button={<Button title="-" onPress={this.removeMeal} />} 
             />
             ))
           }
@@ -126,10 +128,20 @@ export default class Main extends React.Component {
           /> */}
         </List> 
         </ScrollView>
-        <Button title="Add Meal" onPress={() => {this.props.navigation.navigate('Meals')}} />
-        <Button title="Logout" onPress={this.signOut} />
-        {/* <Button title="Remove Meal" onPress={this.removeMeal} /> */}
 
+        <Button 
+          style={styles.addMealButton}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: 'grey', width: '40%', position: 'absolute',left: 30, bottom: 10}}
+          title="Add Meal" 
+          onPress={() => {this.props.navigation.navigate('Meals')}}
+        >Add Meal
+        </Button>
+        <Button 
+          style={styles.logoutButton}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: 'grey', width: '40%', position: 'absolute', right: 30, bottom: 10,}}
+          title="Logout" 
+          onPress={this.signOut} 
+        >Logout</Button>
       </View>
     )
   }
@@ -166,6 +178,18 @@ const styles = StyleSheet.create({
     height: 100,
     marginBottom: 10,
     marginLeft: 0
+  },
+  addMealButton: {
+    position: 'absolute',
+    right: 30,
+    bottom: 10,
+    color: 'green'
+  },
+  logoutButton: {
+    position: 'absolute',
+    left: 30,
+    bottom: 10,
+    color: 'red'
   }
 });
 

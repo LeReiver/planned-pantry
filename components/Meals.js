@@ -66,7 +66,6 @@ export default class Meals extends Component{
       let mealDate = this.state.date;
 
       const userId = firebase.auth().currentUser.uid;
-      console.log('Adding Meal', userId)
       firebase.database().ref('users/' + userId + '/meal').push(
           {
             mealName: mealName,
@@ -74,7 +73,7 @@ export default class Meals extends Component{
             mealDate: mealDate
         })
         .then(() => {
-            console.log('Added Meal')
+          this.props.navigation.navigate('Main')
 
           })
         .catch(err => console.log(err))
