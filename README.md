@@ -27,7 +27,7 @@ This project was built in one week while learning new technologies.
 
 
 ### Future Features
-
+* Deployment to App Store
 * Ability to sort and delete meals
 * Ability to add and store current pantry items
 * Ability to add and store shopping list items 
