@@ -26,7 +26,7 @@ export default class Main extends React.Component {
     this.setState( {currentUser} )
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        firebase.database().ref('users/' + user.uid ).child('meal').on('value', data => {
+        firebase.database().ref('users/' + user.uid ).child('meal').orderByChild('mealDate').on('value', data => {
           let returnArr = [];
 
           data.forEach(function(childSnapshot) {
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   },
   mealListName: {
     position: 'relative',
-    left: 2,
+    left: 0,
     top: 2,
     marginLeft: 0,
     color: '#77A668',
