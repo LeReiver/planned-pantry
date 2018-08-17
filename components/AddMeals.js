@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, Picker} from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import Button from 'react-native-button';
 import { Header } from 'react-native-elements'
 import firebase from 'firebase';
@@ -10,25 +10,11 @@ export default class AddMeals extends Component{
         super(props);
         this.state = {
             currentUser: null,
+            errorMessage: '',
             mealName: '',
             mealTime: '',
             date: ''
         }
-    }
-    
-    componentWillMount() {
-        // const { currentUser } = firebase.auth()
-        // this.setState({ 
-        //   currentUser
-        // })
-
-        firebase.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            return user;
-          } else {
-            // No user is signed in.
-          }
-        })
     }
 
     getDate() {
@@ -54,7 +40,6 @@ export default class AddMeals extends Component{
               marginLeft: 36,
               width: 30
             }
-            // ... You can check the source to find the other keys.
           }}
           onDateChange={(date) => {this.setState({date: date})}}
         />
@@ -67,6 +52,14 @@ export default class AddMeals extends Component{
       let mealDate = this.state.date;
 
       const userId = firebase.auth().currentUser.uid;
+      if (mealName === '') {
+        this.setState({ errorMessage: 'Please enter a meal name' })
+        return
+      }
+      if (mealTime === '') {
+        this.setState({ errorMessage: 'Please enter a meal time' })
+        return
+      }
       firebase.database().ref('users/' + userId + '/meal').push(
           {
             mealName: mealName,
@@ -75,9 +68,8 @@ export default class AddMeals extends Component{
         })
         .then(() => {
           this.props.navigation.navigate('Main')
-
           })
-        .catch(err => console.log(err))
+        .catch(error => this.setState({ errorMessage: error.message }))
     }
 
     signOut() {
@@ -86,6 +78,7 @@ export default class AddMeals extends Component{
         console.log('you have logged out')
       }).catch(function(error) {
         // An error happened.
+        console.log('error logging out')
       });
     }
 
@@ -95,11 +88,15 @@ export default class AddMeals extends Component{
           <View style={styles.container}>
            <Header
           statusBarProps={{ barStyle: 'light-content' }}
-          centerComponent={{ text: 'Planned Pantry', style: { color: 'white', fontSize: 40, marginTop: 20 } }}
-          outerContainerStyles={{ backgroundColor: '#3D6DCC', width: '100%', height: 100}}
+          centerComponent={{ text: 'Planned Pantry', style: { color: '#D6FFBE', fontSize: 40, marginTop: 20 } }}
+          outerContainerStyles={{ backgroundColor: '#228765', width: '100%', height: 100}}
           innerContainerStyles={{ justifyContent: 'space-around', height: 50 }}
           />
           <Text style={styles.title}>Add A Meal</Text>
+          {this.state.errorMessage &&
+          <Text style={{ color: 'red' }}>
+            {this.state.errorMessage}
+          </Text>}
           <TextInput
             style={styles.textInput}
             autoCapitalize="none"
@@ -116,14 +113,6 @@ export default class AddMeals extends Component{
             value={this.state.mealTime}
             required
           />
-          {/* <Picker
-            selectedValue={this.state.mealTime}
-            style={{ height: 50, width: 100,marginBottom: 0, marginTop: 0 }}
-            onValueChange={mealTime => this.setState({ mealTime })}>
-            <Picker.Item label="Breakfast" value="Breakfast" />
-            <Picker.Item label="Lunch" value="Lunch" />
-            <Picker.Item label="Dinner" value="Dinner" />
-          </Picker> */}
           <DatePicker 
             style={styles.textInput}
             date={this.state.date}
@@ -152,20 +141,18 @@ export default class AddMeals extends Component{
           title="Add" 
           onPress={() => this.addMeal()}
           style={styles.addButton}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '60%', justifyContent: 'center', marginTop: 20, alignItems: 'center'}}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '60%', justifyContent: 'center', marginTop: 20, alignItems: 'center'}}
           >Add Meal</Button>
-          {/* <Button title="Show Meals" onPress={() => {this.props.navigation.navigate('Main')}} /> */}
-
           <Button 
           style={styles.goToMealButton}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '40%', position: 'absolute',left: 30, bottom: 10}}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute',left: 30, bottom: 10}}
           title="Add Meal" 
           onPress={() => {this.props.navigation.navigate('Main')}}
         >Meals
         </Button>
         <Button 
           style={styles.logoutButton}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '40%', position: 'absolute', right: 30, bottom: 10,}}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute', right: 30, bottom: 10,}}
           title="Logout" 
           onPress={this.signOut} 
         >Logout</Button>
@@ -182,7 +169,7 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 20,
     fontSize: 30,
-    color: 'blue'
+    color: '#228765'
   },
   textInput: {
     height: 40,
@@ -192,13 +179,13 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   addButton: {
-    color: 'white',
+    color: '#D6FFBE',
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 22
   },
   goToMealButton: {
-    color: 'white',
+    color: '#D6FFBE',
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 22

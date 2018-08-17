@@ -18,16 +18,21 @@ export default class Login extends React.Component {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => this.props.navigation.navigate('Main'))
+      .catch(error => this.setState({ errorMessage: error.message }))
   }
+
   render() {
     return (
       <View style={styles.container}>
         <Header
           statusBarProps={{ barStyle: 'light-content' }}
-          centerComponent={{ text: 'Planned Pantry', style: { color: 'white', fontSize: 40, marginTop: 20 } }}
-          outerContainerStyles={{ backgroundColor: '#3D6DCC', width: '100%', height: 100}}
+          centerComponent={{ text: 'Planned Pantry', style: { color: '#D6FFBE', fontSize: 40, marginTop: 20 } }}
+          outerContainerStyles={{ backgroundColor: '#228765', width: '100%', height: 100}}
           innerContainerStyles={{ justifyContent: 'space-around', height: 50 }}
         />
+        <Text style={styles.desc}>Plan and log your weekly meals.</Text>
+        <Text style={styles.desc}>Create meals with meal times.</Text>
+        <Text style={styles.desc}>Add them to your calendar.</Text>
         <Text style={styles.title}>Login</Text>
         {this.state.errorMessage &&
           <Text style={{ color: 'red' }}>
@@ -51,19 +56,17 @@ export default class Login extends React.Component {
         <Button 
           onPress={this.handleLogin}
           style={styles.signUpButton}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '60%', justifyContent: 'center', marginTop: 20, marginBottom: 20, alignItems: 'center'}}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '60%', justifyContent: 'center', marginTop: 10, marginBottom: 10, alignItems: 'center'}}
         >Login</Button>
         <Text >Don't have an account yet?</Text>
         <Button 
           onPress={() => this.props.navigation.navigate('SignUp')}
           style={styles.signUpButton}
-          // onPress={() => this.props.navigation.navigate('Login')}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '60%', justifyContent: 'center', marginTop: 20, alignItems: 'center'}}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '60%', justifyContent: 'center', marginTop: 10, alignItems: 'center'}}
         >Go To Sign Up</Button>
 
         <Text style={styles.testAccount}>Need a test account?</Text>
-        <Text >email: test-user@mail.com</Text>
-        <Text >password: test-user</Text>
+        <Text style={styles.testAccount}>email: test-user@mail.com | password: test-user</Text>
       </View>
     )
   }
@@ -75,8 +78,15 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 20,
-    fontSize: 30,
-    color: 'blue'
+    fontSize: 20,
+    color: '#228765'
+  },
+  desc: {
+    marginTop: 12,
+    fontSize: 20,
+    color: 'black',
+    alignItems: 'flex-start',
+    lineHeight: 20
   },
   textInput: {
     height: 40,
@@ -86,17 +96,18 @@ const styles = StyleSheet.create({
     marginTop: 18
   },
   signUpButton: {
-    color: 'white',
+    color: '#D6FFBE',
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 22
   },
   loginLink: {
-    marginTop: 260
+    marginTop: 2
   },
   testAccount: {
-    marginTop: 20,
+    marginTop: 2,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
+    fontSize: 12
   }
 });

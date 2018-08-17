@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Button from 'react-native-button';
-import { List, ListItem, Header } from 'react-native-elements'
+import { List, ListItem, Header, Card, Icon } from 'react-native-elements'
 import firebase from 'firebase';
 
 export default class Main extends React.Component {
@@ -10,20 +10,15 @@ export default class Main extends React.Component {
 
     this.state = { 
       currentUser: null,
+      errorMessage: '',
       meal: [] 
     }
-
     this.getMeals = this.getMeals.bind(this)
-    
   }
 
   componentDidMount() {
     const that = this;
     this.getMeals(that);
-  }
-
-  componentWillUnMount() {
-    this.getMeals();
   }
 
   getMeals(that) {
@@ -55,39 +50,14 @@ export default class Main extends React.Component {
     });
   }
 
-  removeMeal() {
-    console.log('Removing meal')
-    firebase.database().ref('users')
-    .child('user')
-    .child('meal')
-    .child('mealName')
-    .remove();
-  }
-
   signOut() {
-    firebase.auth().signOut().then(function() {
-      // Sign-out successful.
-      console.log('you have logged out')
-    }).catch(function(error) {
-      // An error happened.
-    });
+    firebase.auth().signOut()
+    .then(function() {
+      return
+    })
+    .catch(error => this.setState({ errorMessage: error.message }))
+ 
   }
-
-  // renderRow (rowData, sectionId) {
-  //   return (
-  //     this.state.meal.map(meal => (
-  //       // console.log(meal.mealName)
-  //     <ListItem
-  //       style={styles.mealListStyle}
-  //       key={sectionId}
-  //       mealDate={rowData.meal.mealDate}
-  //       mealName={rowData.meal.mealName}
-  //       mealTime={rowData.meal.mealTime}
-  //     />
-  //     ))
-    
-  //   )
-  // }
 
   render() {
 
@@ -97,8 +67,8 @@ export default class Main extends React.Component {
       <View style={styles.container}>
          <Header
           statusBarProps={{ barStyle: 'light-content' }}
-          centerComponent={{ text: 'Planned Pantry', style: { color: 'white', fontSize: 40, marginTop: 20 } }}
-          outerContainerStyles={{ backgroundColor: '#3D6DCC', width: '100%', height: 100}}
+          centerComponent={{ text: 'Planned Pantry', style: { color: '#D6FFBE', fontSize: 40, marginTop: 20 } }}
+          outerContainerStyles={{ backgroundColor: '#228765', width: '100%', height: 100}}
           innerContainerStyles={{ justifyContent: 'space-around', height: 50 }}
         />
         <Text style={styles.user}>
@@ -106,39 +76,35 @@ export default class Main extends React.Component {
         </Text>
         <Text style={styles.title}>
          Your Meals
-        </Text>
-        <ScrollView>
-        <List containerStyle={{margin: 20,width: 250}}> 
-          {console.log('render', this.state.meal)}
-            {this.state.meal.map(meal => (
-              // console.log(meal.mealName)
-            <ListItem
-              style={styles.mealListStyle}
-              key={meal.key}
-              mealDate={meal.mealDate}
-              mealName={meal.mealName}
-              mealTime={meal.mealTime}
-            // button={<Button title="-" onPress={this.removeMeal} />} 
-            />
-            ))
-          }
-          {/* <ListView
-            renderRow={this.renderRow}
-            dataSource={this.state.dataSource}
-          /> */}
-        </List> 
+        </Text> {this.state.errorMessage &&
+          <Text style={{ color: 'red' }}>
+            {this.state.errorMessage}
+          </Text>}
+        <ScrollView style={styles.mealListStyle}>
+            {
+              this.state.meal.map(meal => {
+                return (
+                  <Card title={meal.mealDate} key={meal.key} style={styles.mealListTitle}>
+                  <View >
+                    <Text style={styles.mealListTime}>{meal.mealTime}</Text>
+                    <Text style={styles.mealListName}>{meal.mealName}</Text>
+                  </View>
+                </Card>
+                );
+              })
+            }
         </ScrollView>
 
         <Button 
           style={styles.addMealButton}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '40%', position: 'absolute',left: 30, bottom: 10}}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute',left: 30, bottom: 10}}
           title="Add Meal" 
           onPress={() => {this.props.navigation.navigate('AddMeals')}}
         >Add Meal
         </Button>
         <Button 
           style={styles.logoutButton}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '40%', position: 'absolute', right: 30, bottom: 10,}}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute', right: 30, bottom: 10,}}
           title="Logout" 
           onPress={this.signOut} 
         >Logout</Button>
@@ -156,7 +122,7 @@ const styles = StyleSheet.create({
   user: {
     marginTop: 20,
     fontSize: 15,
-    color: 'blue',
+    color: '#777',
     position: 'absolute',
     left: 2,
     top: 80,
@@ -165,7 +131,7 @@ const styles = StyleSheet.create({
   title: {
     marginTop: 20,
     fontSize: 30,
-    color: 'blue'
+    color: '#228765'
   },
   textInput: {
     height: 40,
@@ -175,18 +141,40 @@ const styles = StyleSheet.create({
     marginTop: 8
   },
   mealListStyle: {
-    height: 100,
     marginBottom: 10,
-    marginLeft: 0
+    marginLeft: 0,
+    width: '90%',
+  },
+  mealListTitle: {
+    position: 'relative',
+    left: 2,
+    top: 80,
+    marginLeft: 0,
+    color: 'blue'
+  },
+  mealListName: {
+    position: 'relative',
+    left: 2,
+    top: 2,
+    marginLeft: 0,
+    color: '#77A668',
+    fontSize: 25,
+  },
+  mealListTime: {
+    position: 'relative',
+    left: 0,
+    marginLeft: 0,
+    color: '#777',
+    fontSize: 20,
   },
   addMealButton: {
-    color: 'white',
+    color: '#D6FFBE',
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 22
   },
   logoutButton: {
-    color: 'white',
+    color: '#D6FFBE',
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 22

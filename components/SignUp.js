@@ -10,7 +10,7 @@ export default class SignUp extends React.Component {
     password: '', 
     errorMessage: null
   }
-  
+
   handleSignUp = () => {
     firebase
     .auth()
@@ -24,11 +24,10 @@ render() {
       <View style={styles.container}>
         <Header
           statusBarProps={{ barStyle: 'light-content' }}
-          centerComponent={{ text: 'Planned Pantry', style: { color: 'white', fontSize: 40, marginTop: 20 } }}
-          outerContainerStyles={{ backgroundColor: '#3D6DCC', width: '100%', height: 100}}
+          centerComponent={{ text: 'Planned Pantry', style: { color: '#D6FFBE', fontSize: 40, marginTop: 20 } }}
+          outerContainerStyles={{ backgroundColor: '#228765', width: '100%', height: 100}}
           innerContainerStyles={{ justifyContent: 'space-around', height: 50 }}
         />
-        <Text style={styles.desc}>Plan and log your weekly meals</Text>
         <Text style={styles.title}>Sign Up</Text>
         {this.state.errorMessage &&
           <Text style={{ color: 'red' }}>
@@ -52,7 +51,7 @@ render() {
         <Button 
           onPress={this.handleSignUp}
           style={styles.signUpButton}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '60%', justifyContent: 'center', marginTop: 20, marginBottom: 20, alignItems: 'center'}}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '60%', justifyContent: 'center', marginTop: 10, marginBottom: 10, alignItems: 'center'}}
         >Sign Up</Button>
         <Text >Already have an account?</Text>
         <Button 
@@ -60,7 +59,7 @@ render() {
           onPress={this.handleSignUp}
           style={styles.signUpButton}
           onPress={() => this.props.navigation.navigate('Login')}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '60%', justifyContent: 'center', marginTop: 20, alignItems: 'center'}}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '60%', justifyContent: 'center', marginTop: 10, alignItems: 'center'}}
         >Go To Login</Button>
       </View>
     )
@@ -72,16 +71,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center'
   },
-  desc: {
-    marginTop: 20,
-    fontSize: 25,
-    color: 'black',
-    alignItems: 'center'
-  },
   title: {
     marginTop: 20,
-    fontSize: 30,
-    color: 'blue'
+    fontSize: 20,
+    color: '#228765'
   },
   textInput: {
     height: 40,
@@ -91,7 +84,7 @@ const styles = StyleSheet.create({
     marginTop: 18
   },
   signUpButton: {
-    color: 'white',
+    color: '#D6FFBE',
     justifyContent: 'center',
     alignItems: 'center',
     fontSize: 22
