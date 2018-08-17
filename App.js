@@ -8,7 +8,7 @@ import Loading from './components/Loading';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import Main from './components/Main';
-import Meals from './components/Meals';
+import AddMeals from './components/AddMeals';
 
 const config = {
   apiKey: "AIzaSyAbMcMoPelfM09L14WZ-mFes-NJv036VjY",
@@ -26,10 +26,10 @@ firebase.initializeApp(config);
 const App = createSwitchNavigator(
   {
     Loading,
-    SignUp,
     Login,
+    SignUp,
     Main,
-    Meals
+    AddMeals
   },
   {
     initialRouteName: 'Loading'

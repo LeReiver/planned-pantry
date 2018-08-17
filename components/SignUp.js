@@ -1,10 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
+import Button from 'react-native-button';
 import { Header } from 'react-native-elements'
 import firebase from 'firebase';
 
 export default class SignUp extends React.Component {
-  state = { email: '', password: '', errorMessage: null }
+  state = { 
+    email: '', 
+    password: '', 
+    errorMessage: null
+  }
+  
   handleSignUp = () => {
     firebase
     .auth()
@@ -16,12 +22,13 @@ export default class SignUp extends React.Component {
 render() {
     return (
       <View style={styles.container}>
-      <Header
-        statusBarProps={{ barStyle: 'light-content' }}
-        centerComponent={{ text: 'Planned Pantry', style: { color: '#3c9', fontSize: 30, marginTop: 20 } }}
-        outerContainerStyles={{ backgroundColor: '#3D6DCC', width: '100%', height: 100}}
-        innerContainerStyles={{ justifyContent: 'space-around', height: 50 }}
-      />
+        <Header
+          statusBarProps={{ barStyle: 'light-content' }}
+          centerComponent={{ text: 'Planned Pantry', style: { color: 'white', fontSize: 40, marginTop: 20 } }}
+          outerContainerStyles={{ backgroundColor: '#3D6DCC', width: '100%', height: 100}}
+          innerContainerStyles={{ justifyContent: 'space-around', height: 50 }}
+        />
+        <Text style={styles.desc}>Plan and log your weekly meals</Text>
         <Text style={styles.title}>Sign Up</Text>
         {this.state.errorMessage &&
           <Text style={{ color: 'red' }}>
@@ -42,11 +49,19 @@ render() {
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
         />
-        <Button title="Sign Up" onPress={this.handleSignUp} />
-        <Button
-          title="Already have an account? Login"
+        <Button 
+          onPress={this.handleSignUp}
+          style={styles.signUpButton}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '60%', justifyContent: 'center', marginTop: 20, marginBottom: 20, alignItems: 'center'}}
+        >Sign Up</Button>
+        <Text >Already have an account?</Text>
+        <Button 
+          title="Add" 
+          onPress={this.handleSignUp}
+          style={styles.signUpButton}
           onPress={() => this.props.navigation.navigate('Login')}
-        />
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '60%', justifyContent: 'center', marginTop: 20, alignItems: 'center'}}
+        >Go To Login</Button>
       </View>
     )
   }
@@ -57,9 +72,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center'
   },
+  desc: {
+    marginTop: 20,
+    fontSize: 25,
+    color: 'black',
+    alignItems: 'center'
+  },
   title: {
     marginTop: 20,
-    fontSize: 40,
+    fontSize: 30,
     color: 'blue'
   },
   textInput: {
@@ -69,4 +90,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 18
   },
+  signUpButton: {
+    color: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 22
+  },
+  loginLink: {
+    marginTop: 260
+  }
 });

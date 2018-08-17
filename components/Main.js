@@ -97,7 +97,7 @@ export default class Main extends React.Component {
       <View style={styles.container}>
          <Header
           statusBarProps={{ barStyle: 'light-content' }}
-          centerComponent={{ text: 'Planned Pantry', style: { color: '#3c9', fontSize: 30, marginTop: 20 } }}
+          centerComponent={{ text: 'Planned Pantry', style: { color: 'white', fontSize: 40, marginTop: 20 } }}
           outerContainerStyles={{ backgroundColor: '#3D6DCC', width: '100%', height: 100}}
           innerContainerStyles={{ justifyContent: 'space-around', height: 50 }}
         />
@@ -131,14 +131,14 @@ export default class Main extends React.Component {
 
         <Button 
           style={styles.addMealButton}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: 'grey', width: '40%', position: 'absolute',left: 30, bottom: 10}}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '40%', position: 'absolute',left: 30, bottom: 10}}
           title="Add Meal" 
-          onPress={() => {this.props.navigation.navigate('Meals')}}
+          onPress={() => {this.props.navigation.navigate('AddMeals')}}
         >Add Meal
         </Button>
         <Button 
           style={styles.logoutButton}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: 'grey', width: '40%', position: 'absolute', right: 30, bottom: 10,}}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '40%', position: 'absolute', right: 30, bottom: 10,}}
           title="Logout" 
           onPress={this.signOut} 
         >Logout</Button>
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 20,
-    fontSize: 40,
+    fontSize: 30,
     color: 'blue'
   },
   textInput: {
@@ -180,16 +180,16 @@ const styles = StyleSheet.create({
     marginLeft: 0
   },
   addMealButton: {
-    position: 'absolute',
-    right: 30,
-    bottom: 10,
-    color: 'green'
+    color: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 22
   },
   logoutButton: {
-    position: 'absolute',
-    left: 30,
-    bottom: 10,
-    color: 'red'
+    color: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 22
   }
 });
 

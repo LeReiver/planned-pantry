@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, Button, Picker } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Picker} from 'react-native';
+import Button from 'react-native-button';
 import { Header } from 'react-native-elements'
 import firebase from 'firebase';
 import DatePicker from 'react-native-datepicker'
 
-export default class Meals extends Component{
+export default class AddMeals extends Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -79,7 +80,14 @@ export default class Meals extends Component{
         .catch(err => console.log(err))
     }
 
-
+    signOut() {
+      firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+        console.log('you have logged out')
+      }).catch(function(error) {
+        // An error happened.
+      });
+    }
 
     render() {
 
@@ -87,7 +95,7 @@ export default class Meals extends Component{
           <View style={styles.container}>
            <Header
           statusBarProps={{ barStyle: 'light-content' }}
-          centerComponent={{ text: 'Planned Pantry', style: { color: '#3c9', fontSize: 30, marginTop: 20 } }}
+          centerComponent={{ text: 'Planned Pantry', style: { color: 'white', fontSize: 40, marginTop: 20 } }}
           outerContainerStyles={{ backgroundColor: '#3D6DCC', width: '100%', height: 100}}
           innerContainerStyles={{ justifyContent: 'space-around', height: 50 }}
           />
@@ -144,8 +152,23 @@ export default class Meals extends Component{
           title="Add" 
           onPress={() => this.addMeal()}
           style={styles.addButton}
-          />
-          <Button title="Show Meals" onPress={() => {this.props.navigation.navigate('Main')}} />
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '60%', justifyContent: 'center', marginTop: 20, alignItems: 'center'}}
+          >Add Meal</Button>
+          {/* <Button title="Show Meals" onPress={() => {this.props.navigation.navigate('Main')}} /> */}
+
+          <Button 
+          style={styles.goToMealButton}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '40%', position: 'absolute',left: 30, bottom: 10}}
+          title="Add Meal" 
+          onPress={() => {this.props.navigation.navigate('Main')}}
+        >Meals
+        </Button>
+        <Button 
+          style={styles.logoutButton}
+          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#3D6DCC', width: '40%', position: 'absolute', right: 30, bottom: 10,}}
+          title="Logout" 
+          onPress={this.signOut} 
+        >Logout</Button>
           </View>
         )
     }
@@ -158,7 +181,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginTop: 20,
-    fontSize: 40,
+    fontSize: 30,
     color: 'blue'
   },
   textInput: {
@@ -169,6 +192,21 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   addButton: {
-    marginTop: 30
+    color: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 22
+  },
+  goToMealButton: {
+    color: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 22
+  },
+  logoutButton: {
+    color: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 22
   }
 });
