@@ -13,9 +13,6 @@ export default class Main extends React.Component {
     }
 
     this.getMeals = this.getMeals.bind(this)
-    // this.mealDate = this.mealDate.bind(this)
-    // this.mealName = this.mealName.bind(this)
-    // this.mealTime = this.mealTime.bind(this)
     
   }
 
@@ -99,13 +96,15 @@ export default class Main extends React.Component {
       <View style={styles.container}>
          <Header
           statusBarProps={{ barStyle: 'light-content' }}
-          // leftComponent={<MyCustomLeftComponent />}
-          centerComponent={{ text: 'Planned Pantry', style: { color: '#3c9' } }}
-          outerContainerStyles={{ backgroundColor: '#3D6DCC', width: '100%'}}
-          innerContainerStyles={{ justifyContent: 'space-around' }}
+          centerComponent={{ text: 'Planned Pantry', style: { color: '#3c9', fontSize: 30, marginTop: 20 } }}
+          outerContainerStyles={{ backgroundColor: '#3D6DCC', width: '100%', height: 100}}
+          innerContainerStyles={{ justifyContent: 'space-around', height: 50 }}
         />
-        <Text>
-          Welcome {currentUser && currentUser.email}!
+        <Text style={styles.user}>
+         {currentUser && currentUser.email}
+        </Text>
+        <Text style={styles.title}>
+         Your Meals
         </Text>
         <ScrollView>
         <List containerStyle={{margin: 20,width: 250}}> 
@@ -141,6 +140,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  user: {
+    marginTop: 20,
+    fontSize: 15,
+    color: 'blue',
+    position: 'absolute',
+    left: 2,
+    top: 80,
+    marginLeft: 0
+  },
+  title: {
+    marginTop: 20,
+    fontSize: 40,
+    color: 'blue'
   },
   textInput: {
     height: 40,

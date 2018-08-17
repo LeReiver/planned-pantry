@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, Picker } from 'react-native';
+import { Header } from 'react-native-elements'
 import firebase from 'firebase';
 import DatePicker from 'react-native-datepicker'
 
@@ -85,8 +86,13 @@ export default class Meals extends Component{
 
         return (
           <View style={styles.container}>
-           
-        <Text>Add A Meal</Text>
+           <Header
+          statusBarProps={{ barStyle: 'light-content' }}
+          centerComponent={{ text: 'Planned Pantry', style: { color: '#3c9', fontSize: 30, marginTop: 20 } }}
+          outerContainerStyles={{ backgroundColor: '#3D6DCC', width: '100%', height: 100}}
+          innerContainerStyles={{ justifyContent: 'space-around', height: 50 }}
+          />
+          <Text style={styles.title}>Add A Meal</Text>
           <TextInput
             style={styles.textInput}
             autoCapitalize="none"
@@ -103,6 +109,14 @@ export default class Meals extends Component{
             value={this.state.mealTime}
             required
           />
+          {/* <Picker
+            selectedValue={this.state.mealTime}
+            style={{ height: 50, width: 100,marginBottom: 0, marginTop: 0 }}
+            onValueChange={mealTime => this.setState({ mealTime })}>
+            <Picker.Item label="Breakfast" value="Breakfast" />
+            <Picker.Item label="Lunch" value="Lunch" />
+            <Picker.Item label="Dinner" value="Dinner" />
+          </Picker> */}
           <DatePicker 
             style={styles.textInput}
             date={this.state.date}
@@ -124,29 +138,38 @@ export default class Meals extends Component{
                 marginLeft: 36,
                 width: '70%'
               }
-              // ... You can check the source to find the other keys.
             }}
             onDateChange={(date) => {this.setState({date: date})}}
           />
-          <Button title="Add" onPress={() => this.addMeal()} />
+          <Button 
+          title="Add" 
+          onPress={() => this.addMeal()}
+          style={styles.addButton}
+          />
           <Button title="Show Meals" onPress={() => {this.props.navigation.navigate('Main')}} />
           </View>
         )
     }
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center'
+  },
+  title: {
+    marginTop: 20,
+    fontSize: 40,
+    color: 'blue'
   },
   textInput: {
     height: 40,
     width: '90%',
     borderColor: 'gray',
     borderWidth: 1,
-    marginTop: 8
+    marginTop: 20
+  },
+  addButton: {
+    marginTop: 30
   }
 });

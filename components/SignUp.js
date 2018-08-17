@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import { Header } from 'react-native-elements'
 import firebase from 'firebase';
 
 export default class SignUp extends React.Component {
@@ -15,8 +16,13 @@ export default class SignUp extends React.Component {
 render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Planned Pantry</Text>
-        <Text>Sign Up</Text>
+      <Header
+        statusBarProps={{ barStyle: 'light-content' }}
+        centerComponent={{ text: 'Planned Pantry', style: { color: '#3c9', fontSize: 30, marginTop: 20 } }}
+        outerContainerStyles={{ backgroundColor: '#3D6DCC', width: '100%', height: 100}}
+        innerContainerStyles={{ justifyContent: 'space-around', height: 50 }}
+      />
+        <Text style={styles.title}>Sign Up</Text>
         {this.state.errorMessage &&
           <Text style={{ color: 'red' }}>
             {this.state.errorMessage}
@@ -49,14 +55,18 @@ render() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center'
+  },
+  title: {
+    marginTop: 20,
+    fontSize: 40,
+    color: 'blue'
   },
   textInput: {
     height: 40,
     width: '90%',
     borderColor: 'gray',
     borderWidth: 1,
-    marginTop: 8
-  }
+    marginTop: 18
+  },
 });
