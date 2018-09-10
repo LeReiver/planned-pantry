@@ -4,6 +4,9 @@ Planned Pantry is a React-Native app that allows users to create a private and s
 
 This project was built in one week while learning new technologies.
 
+#### Live App Simulator
+https://snack.expo.io/@lereiver/planned-pantry
+
 ### Stack
 -	React-Native
 - Google's Firebase Serverless Real Time Data Storage
