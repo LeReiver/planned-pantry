@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import Button from 'react-native-button';
 import { Header } from 'react-native-elements'
-import firebase from 'firebase';
+import firebase from './Firebase';
 import DatePicker from 'react-native-datepicker'
 
 export default class AddMeals extends Component{

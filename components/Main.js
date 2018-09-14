@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Button from 'react-native-button';
 import { List, ListItem, Header, Card, Icon } from 'react-native-elements'
-import firebase from 'firebase';
+import firebase from './Firebase';
 
 export default class Main extends React.Component {
   constructor(props) {
