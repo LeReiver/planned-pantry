@@ -82,7 +82,8 @@ export default class Main extends React.Component {
           </Text>}
         <ScrollView style={styles.mealListStyle}>
             {
-              this.state.meal.map(meal => {
+              this.state.meal.map(meal => { 
+                {console.log(meal)}
                 return (
                   <Card title={meal.mealDate} key={meal.key} style={styles.mealListTitle}>
                   <View >
