@@ -1,8 +1,9 @@
 import firebase from 'firebase';
 // import { Firebase } from 'react-native-firebase';
+import { API_KEY } from 'react-native-dotenv'
 
 const config = {
-  apiKey: "AIzaSyAbMcMoPelfM09L14WZ-mFes-NJv036VjY",
+  apiKey: API_KEY,
   authDomain: "planned-pantry.firebaseapp.com",
   databaseURL: "https://planned-pantry.firebaseio.com",
   projectId: "planned-pantry",
