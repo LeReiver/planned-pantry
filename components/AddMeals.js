@@ -97,6 +97,11 @@ export default class AddMeals extends Component{
 
       const { date } = this.state;
       const myDate = date ? date.toString() : '';
+      const day = myDate.split(' ')[0]+ ' ';
+      const month = myDate.split(' ')[1]+ ' ';
+      const thisDate =  myDate.split(' ')[2] + ' ';
+      const thisYear =  myDate.split(' ')[3] + ' ';
+      const newDate = day.concat(month).concat(thisDate).concat(thisYear);
 
         return (
           <View style={styles.container}>
@@ -167,9 +172,10 @@ export default class AddMeals extends Component{
               <CalendarPicker
                 onDateChange={this.onDateChange}
               />
-             {console.log(myDate.split(' ')[0])}
+             {console.log(newDate)}
+
               <View>
-                <Text>SELECTED DATE:{ myDate }</Text>
+                <Text>SELECTED DATE:{ newDate }</Text>
               </View>
             </View>
           {/* </View> */}
