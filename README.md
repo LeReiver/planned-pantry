@@ -1,8 +1,11 @@
 # Planned Pantry
 
-Planned Pantry is a React-Native app that allows users to create a private and secure account to plan and log your weekly meals. Users create meals with meal times and are able to add them to their calendar.
+Planned Pantry is a React-Native app that allows users to create a private and secure account to plan and log your weekly meals. Users create meals with meal times and are able to add them to their Users create meals with meal times and are able to add them to their meals list.
 
 This project was built in one week while learning new technologies.
+
+#### Live App Simulator
+https://snack.expo.io/@lereiver/planned-pantry
 
 ### Stack
 -	React-Native
@@ -27,8 +30,10 @@ This project was built in one week while learning new technologies.
 
 
 ### Future Features
-
-* Ability to sort and delete meals
+* Day of week show on menu item
+* Deployment to App Store
+* Ability to sort meals
+* Ability to delete meals
 * Ability to add and store current pantry items
 * Ability to add and store shopping list items 
 * Application will check shopping list items and compare with items in pantry. If not in pantry, items will be automatically added to shopping list
