@@ -18,10 +18,11 @@ export default class AddMeals extends Component{
             date: '',
             // selectedStartDate: null,
         }
-        console.log(this.state.date)
         this.onDateChange = this.onDateChange.bind(this);
     }
 
+    
+    
     onDateChange(date) {
       this.setState({
         date: date,
@@ -60,7 +61,15 @@ export default class AddMeals extends Component{
     addMeal() {
       let mealName = this.state.mealName;
       let mealTime = this.state.mealTime;
-      let mealDate = this.state.date;
+      // let mealDate = this.state.date;
+
+      const { date } = this.state;
+      const myDate = date ? date.toString() : '';
+      const day = myDate.split(' ')[0]+ ' ';
+      const month = myDate.split(' ')[1]+ ' ';
+      const thisDate =  myDate.split(' ')[2] + ' ';
+      const thisYear =  myDate.split(' ')[3];
+      const mealDate = day.concat(month).concat(thisDate).concat(thisYear);
 
       const userId = firebase.auth().currentUser.uid;
       if (mealName === '') {
@@ -101,7 +110,7 @@ export default class AddMeals extends Component{
       const month = myDate.split(' ')[1]+ ' ';
       const thisDate =  myDate.split(' ')[2] + ' ';
       const thisYear =  myDate.split(' ')[3] + ' ';
-      const newDate = day.concat(month).concat(thisDate).concat(thisYear);
+      const selectedDate = day.concat(month).concat(thisDate).concat(thisYear);
 
         return (
           <View style={styles.container}>
@@ -171,11 +180,13 @@ export default class AddMeals extends Component{
             <View style={styles.calendar}>
               <CalendarPicker
                 onDateChange={this.onDateChange}
+
+            // onDateChange={(selectedDate) => {this.setState({date: selectedDate})}}
               />
-             {console.log(newDate)}
+             {console.log(selectedDate)}
 
               <View>
-                <Text>SELECTED DATE:{ newDate }</Text>
+                <Text>SELECTED DATE:  { selectedDate }</Text>
               </View>
             </View>
           {/* </View> */}
