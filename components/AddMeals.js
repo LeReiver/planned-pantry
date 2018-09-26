@@ -61,15 +61,9 @@ export default class AddMeals extends Component{
     addMeal() {
       let mealName = this.state.mealName;
       let mealTime = this.state.mealTime;
-      // let mealDate = this.state.date;
 
       const { date } = this.state;
       const mealDate = date ? date.toString() : '';
-      // const day = myDate.split(' ')[0]+ ' ';
-      // const month = myDate.split(' ')[1]+ ' ';
-      // const thisDate =  myDate.split(' ')[2] + ' ';
-      // const thisYear =  myDate.split(' ')[3];
-      // const mealDate = day.concat(month).concat(thisDate).concat(thisYear);
 
       const userId = firebase.auth().currentUser.uid;
       if (mealName === '') {
@@ -116,13 +110,14 @@ export default class AddMeals extends Component{
         return (
           <View style={styles.container}>
            <Header
-          statusBarProps={{ barStyle: 'light-content' }}
-          centerComponent={{ text: 'Planned Pantry', style: { color: '#D6FFBE', fontSize: 40, marginTop: 20 } }}
-          outerContainerStyles={{ backgroundColor: '#228765', width: '100%', height: 100}}
-          innerContainerStyles={{ justifyContent: 'space-around', height: 50 }}
+            statusBarProps={{ barStyle: 'light-content' }}
+            centerComponent={{ text: 'Planned Pantry', style: { color: '#D6FFBE', fontSize: 20, marginTop: 20 } }}
+            outerContainerStyles={{ backgroundColor: '#228765', width: '100%', height: 80}}
+            innerContainerStyles={{ justifyContent: 'space-around', height: 50 }}
           />
-          <Text style={styles.title}>Add A Meal</Text>
-          {this.state.errorMessage &&
+            {/* <Text style={styles.title}>Add A Meal</Text> */}
+       
+            {this.state.errorMessage &&
           <Text style={{ color: 'red' }}>
             {this.state.errorMessage}
           </Text>}
@@ -143,7 +138,7 @@ export default class AddMeals extends Component{
             required
           />
 
-{/*           
+        {/*           
           <DatePicker 
             style={styles.textInput}
             date={this.state.date}
@@ -181,11 +176,8 @@ export default class AddMeals extends Component{
             <View style={styles.calendar}>
               <CalendarPicker
                 onDateChange={this.onDateChange}
-
-            // onDateChange={(selectedDate) => {this.setState({date: selectedDate})}}
               />
              {console.log(selectedDate)}
-
               <View>
                 <Text>SELECTED DATE:  { selectedDate }</Text>
               </View>
@@ -194,25 +186,27 @@ export default class AddMeals extends Component{
 
 
           <Button 
-          title="Add" 
-          onPress={() => this.addMeal()}
-          style={styles.addButton}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '60%', justifyContent: 'center', marginTop: 2, alignItems: 'center'}}
-          >Add Meal</Button>
+            title="Add" 
+            onPress={() => this.addMeal()}
+            style={styles.addButton}
+            containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '60%', justifyContent: 'center', marginTop: 2, alignItems: 'center'}}
+          >Add Meal
+          </Button>
+            <Button 
+            style={styles.goToMealButton}
+            containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute',left: 30, bottom: 10}}
+            title="Add Meal" 
+            onPress={() => {this.props.navigation.navigate('Main')}}
+          >Meals
+          </Button>
           <Button 
-          style={styles.goToMealButton}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute',left: 30, bottom: 10}}
-          title="Add Meal" 
-          onPress={() => {this.props.navigation.navigate('Main')}}
-        >Meals
-        </Button>
-        <Button 
-          style={styles.logoutButton}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute', right: 30, bottom: 10,}}
-          title="Logout" 
-          onPress={this.signOut} 
-        >Logout</Button>
-          </View>
+            style={styles.logoutButton}
+            containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute', right: 30, bottom: 10,}}
+            title="Logout" 
+            onPress={this.signOut} 
+            >Logout
+          </Button>
+        </View>
         )
     }
 }

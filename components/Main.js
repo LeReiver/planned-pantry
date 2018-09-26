@@ -36,6 +36,7 @@ export default class Main extends React.Component {
             returnArr.push(item);
           });
           returnArr.map(meal => {
+            console.log('getMeals ',meal.mealDate)
             return meal
           })
           that.setState({
@@ -67,9 +68,9 @@ export default class Main extends React.Component {
       <View style={styles.container}>
          <Header
           statusBarProps={{ barStyle: 'light-content' }}
-          centerComponent={{ text: 'Planned Pantry', style: { color: '#D6FFBE', fontSize: 40, marginTop: 20 } }}
-          outerContainerStyles={{ backgroundColor: '#228765', width: '100%', height: 100}}
-          innerContainerStyles={{ justifyContent: 'space-around', height: 50 }}
+          centerComponent={{ text: 'Planned Pantry', style: { color: '#D6FFBE', fontSize: 20, marginTop: 15, position: 'absolute', left: 15, top: 0 } }}
+          outerContainerStyles={{ backgroundColor: '#228765', width: '100%', height: 60}}
+          // innerContainerStyles={{ justifyContent: 'space-around', height: 20 }}
         />
         <Text style={styles.user}>
          {currentUser && currentUser.email}
@@ -83,7 +84,6 @@ export default class Main extends React.Component {
         <ScrollView style={styles.mealListStyle}>
             {
               this.state.meal.map(meal => { 
-                {console.log('main meal', meal)}
                 let mealDate = meal.mealDate
 
                 const dayOfWeek = mealDate.split(' ')[0]+ ' ';
@@ -93,9 +93,12 @@ export default class Main extends React.Component {
                 const thisDate = dayOfWeek.concat(month).concat(date).concat(year);
                 console.log( thisDate )
                 return (
-                  <Card title={thisDate} key={meal.key} style={styles.mealListTitle}>
+                  <Card  
+                    titleStyle={{ position: 'relative', fontSize: 13, left: 2, top: 0, color: 'black', height: 18, padding: 0}} 
+                    key={meal.key} 
+                    title={thisDate} >
                   <View >
-                    <Text style={styles.mealListTime}>{meal.mealTime}</Text>
+                    <Text style={styles.mealListTime}>{meal.mealTime}:  </Text>
                     <Text style={styles.mealListName}>{meal.mealName}</Text>
                   </View>
                 </Card>
@@ -106,14 +109,14 @@ export default class Main extends React.Component {
 
         <Button 
           style={styles.addMealButton}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute',left: 30, bottom: 10}}
+          containerStyle={{padding:10, height:40, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute',left: 30, bottom: 10}}
           title="Add Meal" 
           onPress={() => {this.props.navigation.navigate('AddMeals')}}
         >Add Meal
         </Button>
         <Button 
           style={styles.logoutButton}
-          containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute', right: 30, bottom: 10,}}
+          containerStyle={{padding:10, height:40, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute', right: 30, bottom: 10,}}
           title="Logout" 
           onPress={this.signOut} 
         >Logout</Button>
@@ -129,17 +132,17 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   user: {
-    marginTop: 20,
+    marginTop: 0,
     fontSize: 15,
     color: '#777',
     position: 'absolute',
-    left: 2,
-    top: 80,
+    right: 4,
+    top: 60,
     marginLeft: 0
   },
   title: {
     marginTop: 20,
-    fontSize: 30,
+    fontSize: 20,
     color: '#228765'
   },
   textInput: {
@@ -150,43 +153,35 @@ const styles = StyleSheet.create({
     marginTop: 8
   },
   mealListStyle: {
-    marginBottom: 10,
+    marginBottom: 50,
     marginLeft: 0,
-    width: '90%',
-  },
-  mealListTitle: {
-    position: 'relative',
-    left: 2,
-    top: 80,
-    marginLeft: 0,
-    color: 'blue'
+    width: '90%'
   },
   mealListName: {
     position: 'relative',
-    left: 0,
+    left: 15,
     top: 2,
-    marginLeft: 0,
     color: '#77A668',
-    fontSize: 25,
+    fontSize: 15,
   },
   mealListTime: {
     position: 'relative',
     left: 0,
     marginLeft: 0,
     color: '#777',
-    fontSize: 20,
+    fontSize: 15,
   },
   addMealButton: {
     color: '#D6FFBE',
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: 22
+    fontSize: 15
   },
   logoutButton: {
     color: '#D6FFBE',
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: 22
+    fontSize: 15
   }
 });
 
