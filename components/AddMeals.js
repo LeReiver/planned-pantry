@@ -64,12 +64,12 @@ export default class AddMeals extends Component{
       // let mealDate = this.state.date;
 
       const { date } = this.state;
-      const myDate = date ? date.toString() : '';
-      const day = myDate.split(' ')[0]+ ' ';
-      const month = myDate.split(' ')[1]+ ' ';
-      const thisDate =  myDate.split(' ')[2] + ' ';
-      const thisYear =  myDate.split(' ')[3];
-      const mealDate = day.concat(month).concat(thisDate).concat(thisYear);
+      const mealDate = date ? date.toString() : '';
+      // const day = myDate.split(' ')[0]+ ' ';
+      // const month = myDate.split(' ')[1]+ ' ';
+      // const thisDate =  myDate.split(' ')[2] + ' ';
+      // const thisYear =  myDate.split(' ')[3];
+      // const mealDate = day.concat(month).concat(thisDate).concat(thisYear);
 
       const userId = firebase.auth().currentUser.uid;
       if (mealName === '') {
@@ -106,6 +106,7 @@ export default class AddMeals extends Component{
 
       const { date } = this.state;
       const myDate = date ? date.toString() : '';
+      // console.log(myDate)
       const day = myDate.split(' ')[0]+ ' ';
       const month = myDate.split(' ')[1]+ ' ';
       const thisDate =  myDate.split(' ')[2] + ' ';

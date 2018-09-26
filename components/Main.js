@@ -83,9 +83,17 @@ export default class Main extends React.Component {
         <ScrollView style={styles.mealListStyle}>
             {
               this.state.meal.map(meal => { 
-                {console.log(meal)}
+                {console.log('main meal', meal)}
+                let mealDate = meal.mealDate
+
+                const dayOfWeek = mealDate.split(' ')[0]+ ' ';
+                const month = mealDate.split(' ')[1]+ ' ';
+                const date =  mealDate.split(' ')[2] + ' ';
+                const year =  mealDate.split(' ')[3];
+                const thisDate = dayOfWeek.concat(month).concat(date).concat(year);
+                console.log( thisDate )
                 return (
-                  <Card title={meal.mealDate} key={meal.key} style={styles.mealListTitle}>
+                  <Card title={thisDate} key={meal.key} style={styles.mealListTitle}>
                   <View >
                     <Text style={styles.mealListTime}>{meal.mealTime}</Text>
                     <Text style={styles.mealListName}>{meal.mealName}</Text>
