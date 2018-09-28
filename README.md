@@ -2,39 +2,39 @@
 
 Planned Pantry is a React-Native app that allows users to create a private and secure account to plan and log your weekly meals. Users create meals with meal times and are able to add them to their Users create meals with meal times and are able to add them to their meals list.
 
-This project was built in one week while learning new technologies.
 
 #### Live App Simulator
-https://snack.expo.io/@lereiver/planned-pantry
+To come ...
 
 ### Stack
 -	React-Native
 - Google's Firebase Serverless Real Time Data Storage
 -	Firebase User Authentication
 
-### Features
+### Completed Features
 
 * Authenticate user
 * User inputs meal plan
 * Application stores daily meals for user reference 
+* Application renders Meal List in card objects
+* Day of week show on menu item card title
 
 
-### Screenshots
-
-#### Mobile Small
-
-![Mobile Small Login Page](https://github.com/LeReiver/planned-pantry/blob/master/components/images/login.png?raw=true "Mobile Small  Login Page")
-![Mobile Small Sign Up Page](https://github.com/LeReiver/planned-pantry/blob/master/components/images/signup.png?raw=true "Mobile Small  Sign Up Page")
-![Mobile Small Meals Page](https://github.com/LeReiver/planned-pantry/blob/master/components/images/meals.png?raw=true "Mobile Small Meals Page")
-![Mobile Small Add Meal Page](https://github.com/LeReiver/planned-pantry/blob/master/components/images/add-meal.png?raw=true "Mobile Small  Add Meal Page")
-
-
-### Future Features
-* Day of week show on menu item
-* Deployment to App Store
+### To Do Features
+* Meals will be grouped by day
+* Days will be grouped by week
+* Calendar component to select week/day list
 * Ability to sort meals
 * Ability to delete meals
 * Ability to add and store current pantry items
 * Ability to add and store shopping list items 
 * Application will check shopping list items and compare with items in pantry. If not in pantry, items will be automatically added to shopping list
+* Deployment to App Store
+
+
+### Screenshots
+
+To come ...
+
+
 
