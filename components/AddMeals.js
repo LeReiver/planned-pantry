@@ -109,14 +109,20 @@ export default class AddMeals extends Component{
 
         return (
           <View style={styles.container}>
-           <Header
+          <Header
             statusBarProps={{ barStyle: 'light-content' }}
-            centerComponent={{ text: 'Planned Pantry', style: { color: '#D6FFBE', fontSize: 20, marginTop: 20 } }}
-            outerContainerStyles={{ backgroundColor: '#228765', width: '100%', height: 80}}
-            innerContainerStyles={{ justifyContent: 'space-around', height: 50 }}
+            centerComponent={{ text: 'Planned Pantry', style: { color: '#D6FFBE', fontSize: 20, marginTop: 15, position: 'absolute', left: 15, top: 0 } }}
+            outerContainerStyles={{ backgroundColor: '#228765', width: '100%', height: 60}}
+            // innerContainerStyles={{ justifyContent: 'space-around', height: 20 }}
           />
             {/* <Text style={styles.title}>Add A Meal</Text> */}
-       
+            <Button 
+            title="Add" 
+            onPress={() => this.addMeal()}
+            style={styles.addButton}
+            containerStyle={{padding:10, height:40, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '60%', justifyContent: 'center', marginTop: 10, alignItems: 'center'}}
+          >Add Meal
+          </Button>
             {this.state.errorMessage &&
           <Text style={{ color: 'red' }}>
             {this.state.errorMessage}
@@ -173,35 +179,29 @@ export default class AddMeals extends Component{
               </Text>
             </View> */}
 
-            <View style={styles.calendar}>
+            <View style={styles.calendar}> <View>
+                <Text style={styles.selectedDate}>SELECTED DATE:  {selectedDate}</Text>
+              </View>
               <CalendarPicker
                 onDateChange={this.onDateChange}
               />
              {console.log(selectedDate)}
-              <View>
-                <Text>SELECTED DATE:  { selectedDate }</Text>
-              </View>
+             
             </View>
           {/* </View> */}
 
 
-          <Button 
-            title="Add" 
-            onPress={() => this.addMeal()}
-            style={styles.addButton}
-            containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '60%', justifyContent: 'center', marginTop: 2, alignItems: 'center'}}
-          >Add Meal
-          </Button>
+
             <Button 
             style={styles.goToMealButton}
-            containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute',left: 30, bottom: 10}}
+            containerStyle={{padding:10, height:40, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute',left: 30, bottom: 10}}
             title="Add Meal" 
             onPress={() => {this.props.navigation.navigate('Main')}}
           >Meals
           </Button>
           <Button 
             style={styles.logoutButton}
-            containerStyle={{padding:10, height:50, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute', right: 30, bottom: 10,}}
+            containerStyle={{padding:10, height:40, overflow:'hidden', borderRadius:4, backgroundColor: '#228765', width: '40%', position: 'absolute', right: 30, bottom: 10,}}
             title="Logout" 
             onPress={this.signOut} 
             >Logout
@@ -228,27 +228,32 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 20
   },
+  selectedDate: {
+    fontSize: 20,
+    marginBottom: 10,
+    marginTop: 0,
+    color: 'green'
+  },
   calendar: {
     marginTop: 30,
-    
     marginBottom: 30
   },
   addButton: {
     color: '#D6FFBE',
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: 22,
+    fontSize: 15
   },
   goToMealButton: {
     color: '#D6FFBE',
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: 22
+    fontSize: 15
   },
   logoutButton: {
     color: 'white',
     justifyContent: 'center',
     alignItems: 'center',
-    fontSize: 22
+    fontSize: 15
   }
 });
